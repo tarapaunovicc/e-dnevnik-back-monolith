@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface TeachersClassesRepository extends JpaRepository<TeachersClasses, TeachersClassesPK> {
     List<TeachersClasses> findByTeacherUsername(String username);
+    TeachersClasses findByIdClassidAndIdTeacherusername(Integer classid, String username);
 }

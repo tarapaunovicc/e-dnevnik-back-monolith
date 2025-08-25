@@ -32,7 +32,7 @@ public class User implements Serializable, UserDetails {
     private String password;
 
     @Column (name="role")
-    private String role;
+    private Role role;
 
     @Override
     public boolean equals(Object o) {
@@ -56,7 +56,7 @@ public class User implements Serializable, UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(role));
+        return List.of(new SimpleGrantedAuthority(role.toString()));
     }
 
     @Override

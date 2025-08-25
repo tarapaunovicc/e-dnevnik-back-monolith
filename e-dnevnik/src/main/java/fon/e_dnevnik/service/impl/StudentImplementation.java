@@ -44,7 +44,6 @@ public List<StudentDTO> findAll() {
             .map(student -> modelMapper.map(student, StudentDTO.class))
             .collect(Collectors.toList());
 }
-
 @Override
 public StudentDTO findById(Object id) throws Exception {
     Optional<Student> student = studentRepository.findById((String) id);
@@ -54,27 +53,12 @@ public StudentDTO findById(Object id) throws Exception {
         throw new Exception("Student not found");
     }
 }
-
 @Override
 public StudentDTO save(StudentDTO studentDTO) throws Exception {
     Student student = modelMapper.map(studentDTO, Student.class);
     student = studentRepository.save(student);
     return modelMapper.map(student, StudentDTO.class);
 }
-    public List<GradeDTO> getGrades(String username) {
-        List<Grade> grades = gradeRepository.findByStudentUsername(username);
-        return grades.stream()
-                .map(grade -> modelMapper.map(grade, GradeDTO.class))
-                .collect(Collectors.toList());
-    }
-
-    public List<AbsenceDTO> getAbsences(String username) {
-        List<Absence> absences = absenceRepository.findByStudentUsername(username);
-        return absences.stream()
-                .map(absence -> modelMapper.map(absence, AbsenceDTO.class))
-                .collect(Collectors.toList());
-    }
-
 public List<StudentDTO> findByStudentClassClassId(int classId) {
     List<Student> students = studentRepository.findByStudentClassClassId(classId);
     return students.stream()
@@ -82,195 +66,3 @@ public List<StudentDTO> findByStudentClassClassId(int classId) {
             .collect(Collectors.toList());
 }
 }
-//ovo je druga verzija
-//@Service
-//public class StudentImplementation implements ServiceInterface<StudentDTO> {
-//
-//    private StudentRepository studentRepository;
-//    private ModelMapper modelMapper;
-//    private GradeRepository gradeRepository;
-//    private AbsenceRepository absenceRepository;
-//
-//    @Autowired
-//    public StudentImplementation(StudentRepository studentRepository, ModelMapper modelMapper, GradeRepository gradeRepository,
-//                                 AbsenceRepository absenceRepository) {
-//        this.studentRepository = studentRepository;
-//        this.modelMapper = modelMapper;
-//        this.gradeRepository = gradeRepository;
-//        this.absenceRepository = absenceRepository;
-//    }
-//
-//    @Override
-//    public List<StudentDTO> findAll() {
-//        List<Student> students = studentRepository.findAll();
-//        List<StudentDTO> studentDTOS = new ArrayList<>();
-//
-//        for (Student student : students) {
-//            StudentDTO studentDTO = modelMapper.map(student, StudentDTO.class);
-//
-//            Hibernate.initialize(student.getGrades());
-//
-//            // Ručno mapiranje grades
-//            List<GradeDTO> gradeDTOS = student.getGrades().stream()
-//                    .map(grade -> modelMapper.map(grade, GradeDTO.class))
-//                    .collect(Collectors.toList());
-//            studentDTO.setGrades(gradeDTOS);
-//
-//            // Ručno mapiranje absences
-//            List<AbsenceDTO> absenceDTOS = student.getAbsences().stream()
-//                    .map(absence -> modelMapper.map(absence, AbsenceDTO.class))
-//                    .collect(Collectors.toList());
-//            studentDTO.setAbsences(absenceDTOS);
-//
-//            studentDTOS.add(studentDTO);
-//        }
-//        return studentDTOS;
-//    }
-//
-//    @Override
-//    public StudentDTO findById(Object id) throws Exception {
-//        Optional<Student> student = studentRepository.findById((String) id);
-//        StudentDTO studentDTO;
-//        if (student.isPresent()) {
-//            studentDTO = modelMapper.map(student.get(), StudentDTO.class);
-//            studentDTO.setStudentClass(modelMapper.map(student.get().getStudentClass(), ClassDTO.class));
-//
-//
-//            // Ručno mapiranje grades
-////            List<GradeDTO> gradeDTOS = student.get().getGrades().stream()
-////                    .map(grade -> modelMapper.map(grade, GradeDTO.class))
-////                    .collect(Collectors.toList());
-////            studentDTO.setGrades(gradeDTOS);
-//
-//            // Ručno mapiranje absences
-//            List<AbsenceDTO> absenceDTOS = student.get().getAbsences().stream()
-//                    .map(absence -> modelMapper.map(absence, AbsenceDTO.class))
-//                    .collect(Collectors.toList());
-//            studentDTO.setAbsences(absenceDTOS);
-//
-//            return studentDTO;
-//        } else {
-//            throw new Exception("Ne postoji ucenik");
-//        }
-//    }
-//
-//    @Override
-//    public StudentDTO save(StudentDTO studentDTO) throws Exception {
-//        return null;
-//    }
-//
-//
-//    public List<StudentDTO> findByStudentClassClassId(int classId) {
-//        System.out.println("1");
-//        List<Student> students = studentRepository.findByStudentClassClassId(classId);
-//        List<StudentDTO> studentDTOS = new ArrayList<>();
-//        for (Student student : students) {
-//            StudentDTO studentDTO = modelMapper.map(student, StudentDTO.class);
-//            System.out.println("2");
-//
-//            Hibernate.initialize(student.getGrades());
-//            // Ručno mapiranje grades
-//            List<GradeDTO> gradeDTOS = student.getGrades().stream()
-//                    .map(grade -> modelMapper.map(grade, GradeDTO.class))
-//                    .collect(Collectors.toList());
-//            studentDTO.setGrades(gradeDTOS);
-//            System.out.println("3");
-//            // Ručno mapiranje absences
-//            List<AbsenceDTO> absenceDTOS = student.getAbsences().stream()
-//                    .map(absence -> modelMapper.map(absence, AbsenceDTO.class))
-//                    .collect(Collectors.toList());
-//            studentDTO.setAbsences(absenceDTOS);
-//
-//            studentDTOS.add(studentDTO);
-//        }
-//        return studentDTOS;
-//    }
-//}
-
-//ovo je prva verzija
-//@Service
-//public class StudentImplementation implements ServiceInterface<StudentDTO> {
-//
-//    private StudentRepository studentRepository;
-//    private ModelMapper modelMapper;
-//
-//    private GradeRepository gradeRepository;
-//
-//    private AbsenceRepository absenceRepository;
-//
-//    @Autowired
-//    public StudentImplementation(StudentRepository studentRepository, ModelMapper modelMapper, GradeRepository gradeRepository,
-//                                 AbsenceRepository absenceRepository) {
-//        this.studentRepository = studentRepository;
-//        this.modelMapper = modelMapper;
-//        this.gradeRepository=gradeRepository;
-//        this.absenceRepository=absenceRepository;
-//    }
-//
-//    @Override
-//    public List<StudentDTO> findAll() {
-//        List<Student> students = studentRepository.findAll();
-//        List<StudentDTO> studentDTOS = new ArrayList<>();
-//
-//        for(Student student: students){
-//            StudentDTO studentDTO = modelMapper.map(student, StudentDTO.class);
-//           //studentDTO.setStudentClassDTO(modelMapper.map(student.getStudentClass(), Class.class));
-//            studentDTOS.add(studentDTO);
-//        }
-//        return studentDTOS;
-//    }
-//
-//    @Override
-//    public StudentDTO findById(Object id) throws Exception {
-//        Optional<Student> student=studentRepository.findById((String) id);
-//        StudentDTO studentDTO;
-//        if(student.isPresent()) {
-//            studentDTO = modelMapper.map(student.get(), StudentDTO.class);
-//            studentDTO.setStudentClass(modelMapper.map(student.get().getStudentClass(), ClassDTO.class));
-//          //  studentDTO.setAbsences(getAbsences(student.get().getUsername()));
-//          //  studentDTO.setGrades(getGrades(student.get().getUsername()));
-//            return studentDTO;
-//        }
-//        else{
-//            throw new Exception("Ne postoji ucenik");
-//        }
-//    }
-//
-//    @Override
-//    public StudentDTO save(StudentDTO studentDTO) throws Exception {
-//        return null;
-//    }
-//
-//    public List<GradeDTO> getGrades(String username) {
-//        List<Grade> grades = gradeRepository.findByStudentUsername(username);
-//        List<GradeDTO> gradeDTOS = new ArrayList<>();
-//        for(Grade g: grades){
-//            GradeDTO gradeDTO = modelMapper.map(g, GradeDTO.class);
-//            gradeDTOS.add(gradeDTO);
-//        }
-//        return gradeDTOS;
-//    }
-//
-//    public List<AbsenceDTO> getAbsences(String username) {
-//        List<Absence> absences = absenceRepository.findByStudentUsername(username);
-//        List<AbsenceDTO> absenceDTOS = new ArrayList<>();
-//        for(Absence g: absences){
-//            AbsenceDTO absenceDTO = modelMapper.map(g, AbsenceDTO.class);
-//            absenceDTOS.add(absenceDTO);
-//        }
-//        return absenceDTOS;
-//
-//    }
-//
-//    public List<StudentDTO> findByStudentClassClassId(int classId){
-//        List<Student> students = studentRepository.findByStudentClassClassId(classId);
-//        List<StudentDTO> studentDTOS = new ArrayList<>();
-//        for(Student student: students){
-//                StudentDTO studentDTO = modelMapper.map(student, StudentDTO.class);
-//                System.out.println("da li ovde dodje");
-//                studentDTOS.add(studentDTO);
-//        }
-//        return studentDTOS;
-//    }
-//}
-

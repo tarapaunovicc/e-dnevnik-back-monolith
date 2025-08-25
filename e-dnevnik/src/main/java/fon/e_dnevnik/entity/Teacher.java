@@ -26,34 +26,17 @@ public class Teacher implements Serializable {
     @Column(name="lastname")
     private String lastname;
 
-    @JoinColumn(name="subject",referencedColumnName = "subjectid")
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "subject", referencedColumnName = "subjectid")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private Subject subject;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
-    @JsonIgnore
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private Collection<TeachersClasses> classes;
-
-    @JoinColumn(name="username1",referencedColumnName = "username")
-    @ManyToOne(optional = false)
-    @JsonIgnore
+//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+//    @JoinColumn(name = "username1", referencedColumnName = "username")
+//    @JsonIgnore
+//    private User userTeacher;
+    @OneToOne
+    @JoinColumn(name = "username", referencedColumnName = "username")
     private User userTeacher;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Teacher teacher = (Teacher) o;
-        return Objects.equals(getUsername(), teacher.getUsername()) && Objects.equals(getFirstname(), teacher.getFirstname()) && Objects.equals(getLastname(), teacher.getLastname())
-                && Objects.equals(getSubject(), teacher.getSubject()) && Objects.equals(getUserTeacher(), teacher.getUserTeacher());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getUsername(), getFirstname(), getLastname(), getSubject(), getUserTeacher());
-    }
 }

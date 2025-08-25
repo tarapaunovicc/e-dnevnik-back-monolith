@@ -45,7 +45,6 @@ public class AbsenceController {
 
     @PutMapping("/modify")
     public ResponseEntity<AbsenceDTO> modifyAbsence(@RequestBody AbsenceDTO absenceDTO) throws Exception {
-        System.out.println("uslo je u kontrolora");
         AbsenceDTO updatedAbsence = absenceImplementation.modify(absenceDTO.getId(), absenceDTO.isExcused(), absenceDTO.isIsfinal());
         return ResponseEntity.ok(updatedAbsence);
     }

@@ -1,8 +1,10 @@
 package fon.e_dnevnik.service.impl;
 
 import fon.e_dnevnik.dao.LessonRepository;
+import fon.e_dnevnik.dao.TeachersClassesRepository;
 import fon.e_dnevnik.dto.LessonDTO;
 import fon.e_dnevnik.entity.Lesson;
+import fon.e_dnevnik.entity.TeachersClasses;
 import fon.e_dnevnik.entity.primarykey.LessonPK;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,14 @@ import java.util.Optional;
 public class LessonImplementation implements ServiceInterface<LessonDTO> {
 
     private LessonRepository lessonRepository;
+    private TeachersClassesRepository teachersClassesRepository;
     private ModelMapper modelMapper;
 
     @Autowired
-    public LessonImplementation(LessonRepository lessonRepository, ModelMapper modelMapper) {
+    public LessonImplementation(LessonRepository lessonRepository, ModelMapper modelMapper, TeachersClassesRepository teachersClassesRepository) {
         this.lessonRepository = lessonRepository;
         this.modelMapper = modelMapper;
+        this.teachersClassesRepository=teachersClassesRepository;
     }
 
     @Override
@@ -49,9 +53,30 @@ public class LessonImplementation implements ServiceInterface<LessonDTO> {
             throw new Exception("Ne postoji cas");
         }    }
 
-    @Override
-    public LessonDTO save(LessonDTO lessonDTO) throws Exception {
-        Lesson lesson = modelMapper.map(lessonDTO, Lesson.class);
-        Lesson savedLesson = lessonRepository.save(lesson);
-        return modelMapper.map(savedLesson, LessonDTO.class);    }
+public LessonDTO save(LessonDTO lessonDTO) throws Exception {
+    TeachersClasses tc = teachersClassesRepository
+            .findByIdClassidAndIdTeacherusername(
+                    lessonDTO.getClassid(),
+                    lessonDTO.getTeacherUsername()
+            );
+
+    Lesson lesson = new Lesson();
+    lesson.setDate(lessonDTO.getDate());
+    lesson.setClassOrdinalNumber(lessonDTO.getClassOrdinalNumber());
+    lesson.setCurriculum(lessonDTO.getCurriculum());
+
+    lesson.setTeachersClasses(tc);
+
+    Lesson savedLesson = lessonRepository.save(lesson);
+
+    LessonDTO savedLessonDTO = new LessonDTO();
+    savedLessonDTO.setLessonid(savedLesson.getLessonid());
+    savedLessonDTO.setClassid(tc.getId().getClassid());
+    savedLessonDTO.setTeacherUsername(tc.getId().getTeacherusername());
+    savedLessonDTO.setDate(savedLesson.getDate());
+    savedLessonDTO.setClassOrdinalNumber(savedLesson.getClassOrdinalNumber());
+    savedLessonDTO.setCurriculum(savedLesson.getCurriculum());
+
+    return savedLessonDTO;
+}
 }

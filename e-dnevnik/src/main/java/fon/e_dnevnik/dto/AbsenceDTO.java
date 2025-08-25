@@ -19,8 +19,6 @@ public class AbsenceDTO {
 
     private boolean isfinal;
 
-    private Student student;
-
     private Lesson lesson;
 
 }

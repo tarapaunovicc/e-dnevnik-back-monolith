@@ -29,22 +29,11 @@ public class Absence implements Serializable {
     @ManyToOne(optional = false)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @JsonIgnore
     private Student student;
 
     @ManyToOne(optional = false)
-    @JoinColumns({
-            @JoinColumn(name = "classid", referencedColumnName = "classid",insertable=false, updatable=false),
-            @JoinColumn(name = "teacherusername", referencedColumnName = "username",insertable=false, updatable=false),
-            @JoinColumn(name="lessonid", referencedColumnName = "lessonid",insertable=false, updatable=false)
-    })
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "lesson_id", referencedColumnName = "lesson_id", insertable=false, updatable=false)
     private Lesson lesson;
 
-    public Absence(AbsencePK id) {
-        this.id = id;
-    }
-    public Absence(String stusername, int id,String tcusername, int lessonid){
-        this.id=new AbsencePK(stusername,id,tcusername,lessonid);
-    }
 }

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @SpringBootApplication
 public class EDnevnikApplication {
 
-	@Bean
+	/*@Bean
 	public ModelMapper modelMapper() {
 		ModelMapper modelMapper = new ModelMapper();
 
@@ -38,7 +38,17 @@ public class EDnevnikApplication {
 		});
 		return modelMapper;
 	}
+*/
+	@Bean
+	public ModelMapper modelMapper() {
+		ModelMapper modelMapper = new ModelMapper();
 
+		modelMapper.getConfiguration()
+				.setFieldMatchingEnabled(true)
+				.setFieldAccessLevel(Configuration.AccessLevel.PRIVATE);
+
+		return modelMapper;
+	}
 	public static void main(String[] args) {
 
 		SpringApplication.run(EDnevnikApplication.class, args);

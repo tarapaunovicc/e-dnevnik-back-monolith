@@ -15,13 +15,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AbsencePK implements Serializable {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Basic(optional = false)
-    private String teacherusername;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Basic(optional = false)
-    private int classid;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Basic(optional = false)
@@ -29,6 +22,6 @@ public class AbsencePK implements Serializable {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Basic(optional = false)
-    private Integer lessonid;
+    private Integer lesson_id;
 
 }

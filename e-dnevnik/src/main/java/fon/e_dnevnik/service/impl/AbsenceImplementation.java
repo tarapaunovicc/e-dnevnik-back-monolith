@@ -65,13 +65,10 @@ public class AbsenceImplementation implements ServiceInterface<AbsenceDTO> {
     }
 
     public AbsenceDTO modify(AbsencePK id, boolean excused, boolean isFinal) throws Exception {
-        System.out.println("uslo je u implementaciju");
         Optional<Absence> optionalAbsence = absenceRepository.findById(id);
         if (optionalAbsence.isPresent()) {
             Absence absence = optionalAbsence.get();
-            System.out.println(absence.getId().getTeacherusername());
             absence.setExcused(excused);
-            System.out.println(excused);
             absence.setIsfinal(isFinal);
             Absence updatedAbsence = absenceRepository.save(absence);
             return modelMapper.map(updatedAbsence, AbsenceDTO.class);

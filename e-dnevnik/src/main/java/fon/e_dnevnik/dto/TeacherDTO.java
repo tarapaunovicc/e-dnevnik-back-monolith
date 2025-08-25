@@ -22,8 +22,4 @@ public class TeacherDTO {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private SubjectDTO subject;
 
-    private Collection<TeachersClasses> classes;
-
-    private UserDTO userTeacher;
-
 }

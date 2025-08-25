@@ -22,9 +22,6 @@ public class GradeDTO {
 
     private int grade;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private Student student;
-
-    private Teacher teacher;
+    private TeacherDTO teacher;
 }
 

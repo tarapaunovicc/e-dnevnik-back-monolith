@@ -41,20 +41,25 @@ public class TeacherImplementation implements ServiceInterface<TeacherDTO> {
             teacherDTOS.add(teacherDTO);
         }
         return teacherDTOS;
+        //ne koristis
     }
 
     @Override
     public TeacherDTO findById(Object id) throws Exception {
-        Optional<Teacher> teacher=teacherRepository.findById((String) id);
-        TeacherDTO teacherDTO;
-        if(teacher.isPresent()) {
-            teacherDTO = modelMapper.map(teacher.get(), TeacherDTO.class);
-            teacherDTO.setSubject(modelMapper.map(teacher.get().getSubject(), SubjectDTO.class));
-            return teacherDTO;
-        }
-        else{
+        Optional<Teacher> teacherOpt = teacherRepository.findById((String) id);
+        if (teacherOpt.isEmpty()) {
             throw new Exception("Ne postoji profesor");
         }
+        Teacher teacher = teacherOpt.get();
+        TeacherDTO teacherDTO = modelMapper.map(teacher, TeacherDTO.class);
+        if (teacher.getSubject() != null) {
+            SubjectDTO subjectDTO = modelMapper.map(teacher.getSubject(), SubjectDTO.class);
+            teacherDTO.setSubject(subjectDTO);
+        } else {
+            teacherDTO.setSubject(null);
+        }
+
+        return teacherDTO;
     }
 
     @Override
@@ -62,17 +67,4 @@ public class TeacherImplementation implements ServiceInterface<TeacherDTO> {
         return null;
     }
 
-    public List<TeachersClassesDTO> getTeachersClasses(String username){
-        List<TeachersClasses> teachersClasses = teachersClassesRepository.findByTeacherUsername(username);
-        List<TeachersClassesDTO> teachersClassesDTOS = new ArrayList<>();
-
-        for(TeachersClasses tc: teachersClasses){
-            TeachersClassesDTO teachersClassesDTO = modelMapper.map(tc, TeachersClassesDTO.class);
-            teachersClassesDTO.setTeacher(modelMapper.map(tc.getTeacher(), TeacherDTO.class));
-            teachersClassesDTO.setCl(modelMapper.map(tc.getClass(), ClassDTO.class));
-            teachersClassesDTOS.add(teachersClassesDTO);
-        }
-        System.out.println("ovo"+ teachersClassesDTOS);
-        return teachersClassesDTOS;
-    }
 }

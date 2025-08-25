@@ -54,15 +54,6 @@ public class SecurityConfig {
                 })).csrf((csrf) -> csrf.disable())
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers("**").permitAll())
-//                        .requestMatchers(HttpMethod.POST, "/transactions/plizSave").hasAnyRole("CLIENT")
-//                        .requestMatchers(HttpMethod.GET, "/transactions").hasAnyRole("CLIENT", "EMPLOYEE")
-//                        .requestMatchers(HttpMethod.GET, "/transactions/{id}").hasAnyRole("CLIENT", "EMPLOYEE")
-//                        .requestMatchers(HttpMethod.POST, "/accounts/**", "/clients/**", "/loans/**").hasAnyRole("CLIENT", "EMPLOYEE")
-//                        .requestMatchers(HttpMethod.GET, "/accounts/**").hasAnyRole("CLIENT", "EMPLOYEE")
-//                        .requestMatchers(HttpMethod.GET, "/clients/**").hasAnyRole("CLIENT", "EMPLOYEE")
-//                        .requestMatchers(HttpMethod.GET, "/clients/{id}/accounts").hasAnyRole("CLIENT", "EMPLOYEE")
-//                        .requestMatchers(HttpMethod.GET, "/clients/{id}").hasAnyRole("CLIENT", "EMPLOYEE")
-//                        .requestMatchers(HttpMethod.GET, "/loans/**").hasRole("EMPLOYEE")//                    .requestMatchers("/auth/**").permitAll())
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logoutConfigurer -> logoutConfigurer

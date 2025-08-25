@@ -15,34 +15,25 @@ import java.time.LocalDate;
 @Builder
 public class Lesson implements Serializable {
 
-    @EmbeddedId
-    private LessonPK id;
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
+@Column(name = "lesson_id")
+private Integer lessonid;
 
-    @Column(name="date")
+    @ManyToOne(optional = false)
+    @JoinColumns({
+            @JoinColumn(name = "classid", referencedColumnName = "classid"),
+            @JoinColumn(name = "username", referencedColumnName = "teacherusername")
+    })
+    private TeachersClasses teachersClasses;
+
+    @Column(name = "date", nullable = false)
     private LocalDate date;
 
-    @Column(name="classordinalnumber")
+    @Column(name = "classordinalnumber", nullable = false)
     private int classOrdinalNumber;
 
-    @Column(name="curriculum")
+    @Column(name = "curriculum")
     private String curriculum;
 
-    @JoinColumn(name="username",referencedColumnName = "username",insertable=false, updatable=false)
-    @ManyToOne(optional = false)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private Teacher teacher;
-
-    @JoinColumn(name="classid",referencedColumnName = "classid",insertable=false, updatable=false)
-    @ManyToOne(optional = false)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private Class cl;
-    public Lesson(LessonPK id) {
-        this.id = id;
-    }
-
-    public Lesson(Integer classId,String username, int lessonid){
-        this.id=new LessonPK(classId,username,lessonid);
-    }
 }

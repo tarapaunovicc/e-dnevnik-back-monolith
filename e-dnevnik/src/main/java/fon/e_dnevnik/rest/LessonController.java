@@ -33,6 +33,7 @@ public class LessonController {
 
     @PostMapping("/new")
     public ResponseEntity<LessonDTO> save( @RequestBody LessonDTO lessonDTO) throws Exception {
+        System.out.println(lessonDTO);
         return new ResponseEntity<>(lessonImplementation.save(lessonDTO), HttpStatus.CREATED);
     }
 }

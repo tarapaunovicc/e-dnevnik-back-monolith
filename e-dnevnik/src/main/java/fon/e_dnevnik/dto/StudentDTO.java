@@ -23,11 +23,4 @@ public class StudentDTO {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private ClassDTO studentClass;
-
-    private Collection<GradeDTO> grades;
-
-    private Collection<AbsenceDTO> absences;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private UserDTO userStudent;
 }

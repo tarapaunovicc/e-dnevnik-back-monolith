@@ -12,11 +12,12 @@ import lombok.ToString;
 
 @Data
 public class TeachersClassesDTO {
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private TeachersClassesPK id;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    private TeacherDTO teacher;
+    private Integer classid;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String teacherusername;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private ClassDTO cl;

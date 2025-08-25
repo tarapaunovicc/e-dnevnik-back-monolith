@@ -1,6 +1,8 @@
 package fon.e_dnevnik.service.impl;
 
 import fon.e_dnevnik.dao.GradeRepository;
+import fon.e_dnevnik.dao.StudentRepository;
+import fon.e_dnevnik.dao.TeacherRepository;
 import fon.e_dnevnik.dto.GradeDTO;
 import fon.e_dnevnik.entity.Grade;
 import fon.e_dnevnik.entity.Student;
@@ -15,16 +17,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GradeImplementation implements ServiceInterface<GradeDTO> {
 
     private GradeRepository gradeRepository;
     private ModelMapper modelMapper;
+    private TeacherRepository teacherRepository;
+    private StudentRepository studentRepository;
 
-    public GradeImplementation(GradeRepository gradeRepository, ModelMapper modelMapper) {
+    public GradeImplementation(GradeRepository gradeRepository, ModelMapper modelMapper, StudentRepository studentRepository, TeacherRepository teacherRepository) {
         this.gradeRepository = gradeRepository;
         this.modelMapper = modelMapper;
+        this.studentRepository=studentRepository;
+        this.teacherRepository=teacherRepository;
     }
 
     @Override
@@ -51,17 +58,31 @@ public class GradeImplementation implements ServiceInterface<GradeDTO> {
             throw new Exception("Ne postoji ocena");
         }    }
 
-    @Override
-    public GradeDTO save(GradeDTO gradeDTO) throws Exception {
-        Grade grade = modelMapper.map(gradeDTO, Grade.class);
-        grade.setStudent(modelMapper.map(gradeDTO.getStudent(), Student.class));
-        grade.setTeacher(modelMapper.map(gradeDTO.getTeacher(), Teacher.class));
-        GradePK gradePK = new GradePK(grade.getStudent().getUsername(), grade.getTeacher().getUsername(), 0);
-        grade.setId(gradePK);
-        grade.setDate(LocalDate.now());
-        Grade savedGrade = gradeRepository.save(grade);
-        return modelMapper.map(savedGrade, GradeDTO.class);
-    }
+@Override
+public GradeDTO save(GradeDTO gradeDTO) throws Exception {
+    Student student = studentRepository.findById(gradeDTO.getId().getStudentusername())
+            .orElseThrow(() -> new Exception("Student not found"));
+
+    Teacher teacher = teacherRepository.findById(gradeDTO.getId().getTeacherusername())
+            .orElseThrow(() -> new Exception("Teacher not found"));
+
+    Grade grade = new Grade();
+
+    GradePK gradePK = new GradePK();
+    gradePK.setStudentusername(student.getUsername());
+    gradePK.setTeacherusername(teacher.getUsername());
+
+    grade.setId(gradePK);
+    grade.setStudent(student);
+    grade.setTeacher(teacher);
+    grade.setDate(LocalDate.now());
+    grade.setGrade(gradeDTO.getGrade());
+
+    Grade savedGrade = gradeRepository.save(grade);
+
+    return modelMapper.map(savedGrade, GradeDTO.class);
+}
+
 
     public List<GradeDTO> findByStudentUsername(String username){
         List<Grade> grades = gradeRepository.findByStudentUsername(username);
@@ -72,5 +93,11 @@ public class GradeImplementation implements ServiceInterface<GradeDTO> {
             gradeDTOS.add(gradeDTO);
         }
         return gradeDTOS;
+    }
+    public List<GradeDTO> findByStudentAndTeacher(String studentUsername, String teacherUsername) {
+        List<Grade> grades = gradeRepository.findByIdStudentusernameAndIdTeacherusername(studentUsername, teacherUsername);
+        return grades.stream()
+                .map(grade -> modelMapper.map(grade, GradeDTO.class))
+                .collect(Collectors.toList());
     }
 }

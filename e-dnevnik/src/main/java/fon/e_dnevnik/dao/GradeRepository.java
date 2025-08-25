@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface GradeRepository extends JpaRepository<Grade, GradePK> {
     List<Grade> findByStudentUsername(String username);
+    List<Grade> findByIdStudentusernameAndIdTeacherusername(String studentUsername, String teacherUsername);
+
 }

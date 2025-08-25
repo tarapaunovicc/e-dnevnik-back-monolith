@@ -38,15 +38,6 @@ public class StudentController {
         return new ResponseEntity<>(studentImplementation.save(studentDTO), HttpStatus.CREATED);
     }
 
-//    @GetMapping("/{username}/grades")
-//    public List<GradeDTO> getGrades(@PathVariable String username) throws Exception {
-//        return studentImplementation.getGrades(username);
-//    }
-
-//    @GetMapping("/{username}/absences")
-//    public List<AbsenceDTO> getAbsences(@PathVariable String username) throws Exception {
-//        return studentImplementation.getAbsences(username);
-//    }
     @GetMapping("/class/{classid}")
     public List<StudentDTO> findByStudentClassClassId(@PathVariable int classid){
         System.out.println("Uslo je u kontrolera");

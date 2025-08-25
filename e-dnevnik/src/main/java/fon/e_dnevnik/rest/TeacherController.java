@@ -34,8 +34,5 @@ public class TeacherController {
     public ResponseEntity<TeacherDTO> save(@Valid @RequestBody TeacherDTO teacherDTO) throws Exception {
         return new ResponseEntity<>(teacherImplementation.save(teacherDTO), HttpStatus.CREATED);
     }
-    @GetMapping("/{id}/classes")
-    public List<TeachersClassesDTO> getTeachersClasses(@PathVariable String id) throws Exception {
-        return teacherImplementation.getTeachersClasses(id);
-    }
+
 }
