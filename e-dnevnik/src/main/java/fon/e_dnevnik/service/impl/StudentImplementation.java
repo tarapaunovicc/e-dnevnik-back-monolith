@@ -20,8 +20,7 @@ public class StudentImplementation implements ServiceInterface<StudentDTO> {
     private final StudentRepository studentRepository;
     private final ModelMapper modelMapper;
 @Autowired
-public StudentImplementation(StudentRepository studentRepository, ModelMapper modelMapper, GradeRepository gradeRepository,
-                             AbsenceRepository absenceRepository) {
+public StudentImplementation(StudentRepository studentRepository, ModelMapper modelMapper) {
     this.studentRepository = studentRepository;
     this.modelMapper = modelMapper;
 }

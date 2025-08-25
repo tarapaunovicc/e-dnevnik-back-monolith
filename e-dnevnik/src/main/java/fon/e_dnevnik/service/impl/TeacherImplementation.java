@@ -20,7 +20,7 @@ public class TeacherImplementation implements ServiceInterface<TeacherDTO> {
     private final ModelMapper modelMapper;
 
     @Autowired
-    public TeacherImplementation(TeacherRepository teacherRepository, ModelMapper modelMapper, TeachersClassesRepository teachersClassesRepository) {
+    public TeacherImplementation(TeacherRepository teacherRepository, ModelMapper modelMapper) {
         this.teacherRepository = teacherRepository;
         this.modelMapper = modelMapper;
     }
