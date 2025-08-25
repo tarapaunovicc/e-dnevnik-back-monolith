@@ -3,8 +3,6 @@ package fon.e_dnevnik.entity.primarykey;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

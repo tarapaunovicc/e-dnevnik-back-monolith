@@ -41,7 +41,6 @@ public class SecurityConfig {
 
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                        System.out.println("Proverava konfiguraciju server");
                         CorsConfiguration config = new CorsConfiguration();
                         config.setAllowedOrigins(List.of("http://localhost:4200"));
                         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));

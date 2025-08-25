@@ -1,8 +1,5 @@
 package fon.e_dnevnik.rest;
 
-import com.sun.tools.jconsole.JConsoleContext;
-import fon.e_dnevnik.dto.AbsenceDTO;
-import fon.e_dnevnik.dto.GradeDTO;
 import fon.e_dnevnik.dto.StudentDTO;
 import fon.e_dnevnik.service.impl.StudentImplementation;
 import jakarta.validation.Valid;
@@ -17,7 +14,7 @@ import java.util.List;
 @RequestMapping("/students")
 public class StudentController {
 
-    private StudentImplementation studentImplementation;
+    private final StudentImplementation studentImplementation;
 
     @Autowired
     public StudentController(StudentImplementation studentImplementation) {
@@ -30,7 +27,7 @@ public class StudentController {
 
     @GetMapping("{username}")
     public ResponseEntity<StudentDTO> findById(@PathVariable String username) throws Exception {
-        return ResponseEntity.ok().body(studentImplementation.findById((String)username));
+        return ResponseEntity.ok().body(studentImplementation.findById(username));
     }
 
     @PostMapping

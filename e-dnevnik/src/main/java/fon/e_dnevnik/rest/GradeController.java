@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/grades")
 public class GradeController {
-    private GradeImplementation gradeImplementation;
+    private final GradeImplementation gradeImplementation;
 
     @Autowired
     public GradeController(GradeImplementation gradeImplementation) {
@@ -29,7 +29,7 @@ public class GradeController {
 
     @GetMapping("{id}")
     public ResponseEntity<GradeDTO> findById(@PathVariable GradePK id) throws Exception {
-        return ResponseEntity.ok().body(gradeImplementation.findById((GradePK)id));
+        return ResponseEntity.ok().body(gradeImplementation.findById(id));
     }
 
     @PostMapping
@@ -38,7 +38,7 @@ public class GradeController {
     }
 
     @GetMapping("/student/{username}")
-    public List<GradeDTO> getGrades(@PathVariable String username) throws Exception {
+    public List<GradeDTO> getGrades(@PathVariable String username){
         return gradeImplementation.findByStudentUsername(username);
     }
     @PostMapping("/by-student-teacher")

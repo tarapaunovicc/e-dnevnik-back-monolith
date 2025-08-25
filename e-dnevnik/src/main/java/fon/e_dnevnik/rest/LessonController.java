@@ -3,7 +3,6 @@ package fon.e_dnevnik.rest;
 import fon.e_dnevnik.dto.LessonDTO;
 import fon.e_dnevnik.entity.primarykey.LessonPK;
 import fon.e_dnevnik.service.impl.LessonImplementation;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,7 @@ import java.util.List;
 @RequestMapping("/lessons")
 public class LessonController {
 
-    private LessonImplementation lessonImplementation;
+    private final LessonImplementation lessonImplementation;
 
     @Autowired
     public LessonController(LessonImplementation lessonImplementation) {
@@ -28,7 +27,7 @@ public class LessonController {
 
     @GetMapping("{id}")
     public ResponseEntity<LessonDTO> findById(@PathVariable LessonPK id) throws Exception {
-        return ResponseEntity.ok().body(lessonImplementation.findById((LessonPK)id));
+        return ResponseEntity.ok().body(lessonImplementation.findById(id));
     }
 
     @PostMapping("/new")

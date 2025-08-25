@@ -2,12 +2,9 @@ package fon.e_dnevnik.service.impl;
 
 import fon.e_dnevnik.dao.TeacherRepository;
 import fon.e_dnevnik.dao.TeachersClassesRepository;
-import fon.e_dnevnik.dto.ClassDTO;
 import fon.e_dnevnik.dto.SubjectDTO;
 import fon.e_dnevnik.dto.TeacherDTO;
-import fon.e_dnevnik.dto.TeachersClassesDTO;
 import fon.e_dnevnik.entity.Teacher;
-import fon.e_dnevnik.entity.TeachersClasses;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,15 +16,13 @@ import java.util.Optional;
 
 @Service
 public class TeacherImplementation implements ServiceInterface<TeacherDTO> {
-    private TeacherRepository teacherRepository;
-    private ModelMapper modelMapper;
+    private final TeacherRepository teacherRepository;
+    private final ModelMapper modelMapper;
 
-    private TeachersClassesRepository teachersClassesRepository;
     @Autowired
     public TeacherImplementation(TeacherRepository teacherRepository, ModelMapper modelMapper, TeachersClassesRepository teachersClassesRepository) {
         this.teacherRepository = teacherRepository;
         this.modelMapper = modelMapper;
-        this.teachersClassesRepository=teachersClassesRepository;
     }
 
     @Override

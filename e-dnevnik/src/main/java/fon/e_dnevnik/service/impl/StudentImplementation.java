@@ -3,20 +3,13 @@ package fon.e_dnevnik.service.impl;
 import fon.e_dnevnik.dao.AbsenceRepository;
 import fon.e_dnevnik.dao.GradeRepository;
 import fon.e_dnevnik.dao.StudentRepository;
-import fon.e_dnevnik.dto.AbsenceDTO;
-import fon.e_dnevnik.dto.ClassDTO;
-import fon.e_dnevnik.dto.GradeDTO;
 import fon.e_dnevnik.dto.StudentDTO;
-import fon.e_dnevnik.entity.Absence;
-import fon.e_dnevnik.entity.Grade;
 import fon.e_dnevnik.entity.Student;
 import fon.e_dnevnik.service.ServiceInterface;
-import org.hibernate.Hibernate;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,15 +19,11 @@ public class StudentImplementation implements ServiceInterface<StudentDTO> {
 
     private final StudentRepository studentRepository;
     private final ModelMapper modelMapper;
-    private final GradeRepository gradeRepository;
-    private final AbsenceRepository absenceRepository;
 @Autowired
 public StudentImplementation(StudentRepository studentRepository, ModelMapper modelMapper, GradeRepository gradeRepository,
                              AbsenceRepository absenceRepository) {
     this.studentRepository = studentRepository;
     this.modelMapper = modelMapper;
-    this.gradeRepository = gradeRepository;
-    this.absenceRepository = absenceRepository;
 }
 
 @Override

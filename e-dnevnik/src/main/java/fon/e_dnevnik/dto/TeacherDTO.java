@@ -1,12 +1,9 @@
 package fon.e_dnevnik.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import fon.e_dnevnik.entity.Class;
-import fon.e_dnevnik.entity.TeachersClasses;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
-import java.util.Collection;
 
 @Data
 public class TeacherDTO {

@@ -1,13 +1,9 @@
 package fon.e_dnevnik.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Objects;
-
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
@@ -32,10 +28,6 @@ public class Teacher implements Serializable {
     @EqualsAndHashCode.Exclude
     private Subject subject;
 
-//    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "username1", referencedColumnName = "username")
-//    @JsonIgnore
-//    private User userTeacher;
     @OneToOne
     @JoinColumn(name = "username", referencedColumnName = "username")
     private User userTeacher;

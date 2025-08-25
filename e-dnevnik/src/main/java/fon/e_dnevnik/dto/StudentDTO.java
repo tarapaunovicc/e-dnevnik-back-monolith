@@ -3,10 +3,6 @@ package fon.e_dnevnik.dto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import lombok.Getter;
-
-import java.util.Collection;
-
 @Data
 public class StudentDTO {
 

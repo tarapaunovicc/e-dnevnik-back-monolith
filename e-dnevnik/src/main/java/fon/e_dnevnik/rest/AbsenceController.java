@@ -3,8 +3,6 @@ package fon.e_dnevnik.rest;
 import fon.e_dnevnik.dto.AbsenceDTO;
 import fon.e_dnevnik.entity.primarykey.AbsencePK;
 import fon.e_dnevnik.service.impl.AbsenceImplementation;
-import fon.e_dnevnik.service.impl.LessonImplementation;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/absences")
 public class AbsenceController {
-    private AbsenceImplementation absenceImplementation;
+    private final AbsenceImplementation absenceImplementation;
 
 
     @Autowired
@@ -30,7 +28,7 @@ public class AbsenceController {
 
     @GetMapping("{id}")
     public ResponseEntity<AbsenceDTO> findById(@PathVariable AbsencePK id) throws Exception {
-        return ResponseEntity.ok().body(absenceImplementation.findById((AbsencePK) id));
+        return ResponseEntity.ok().body(absenceImplementation.findById(id));
     }
 
     @PostMapping("/new")

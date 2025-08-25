@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -22,10 +21,10 @@ import java.util.stream.Collectors;
 @Service
 public class GradeImplementation implements ServiceInterface<GradeDTO> {
 
-    private GradeRepository gradeRepository;
-    private ModelMapper modelMapper;
-    private TeacherRepository teacherRepository;
-    private StudentRepository studentRepository;
+    private final GradeRepository gradeRepository;
+    private final ModelMapper modelMapper;
+    private final TeacherRepository teacherRepository;
+    private final StudentRepository studentRepository;
 
     public GradeImplementation(GradeRepository gradeRepository, ModelMapper modelMapper, StudentRepository studentRepository, TeacherRepository teacherRepository) {
         this.gradeRepository = gradeRepository;

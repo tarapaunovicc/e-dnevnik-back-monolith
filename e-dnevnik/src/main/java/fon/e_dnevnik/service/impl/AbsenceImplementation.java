@@ -16,8 +16,8 @@ import java.util.Optional;
 @Service
 public class AbsenceImplementation implements ServiceInterface<AbsenceDTO> {
 
-    private AbsenceRepository absenceRepository;
-    private ModelMapper modelMapper;
+    private final AbsenceRepository absenceRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public AbsenceImplementation(AbsenceRepository absenceRepository, ModelMapper modelMapper) {

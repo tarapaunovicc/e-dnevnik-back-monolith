@@ -2,7 +2,6 @@ package fon.e_dnevnik.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import fon.e_dnevnik.entity.primarykey.AbsencePK;
-import fon.e_dnevnik.entity.primarykey.LessonPK;
 import jakarta.persistence.*;
 import lombok.*;
 

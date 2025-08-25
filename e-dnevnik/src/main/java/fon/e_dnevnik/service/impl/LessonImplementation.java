@@ -18,9 +18,9 @@ import java.util.Optional;
 @Service
 public class LessonImplementation implements ServiceInterface<LessonDTO> {
 
-    private LessonRepository lessonRepository;
-    private TeachersClassesRepository teachersClassesRepository;
-    private ModelMapper modelMapper;
+    private final LessonRepository lessonRepository;
+    private final TeachersClassesRepository teachersClassesRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public LessonImplementation(LessonRepository lessonRepository, ModelMapper modelMapper, TeachersClassesRepository teachersClassesRepository) {

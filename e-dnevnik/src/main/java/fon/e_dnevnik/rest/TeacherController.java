@@ -1,7 +1,6 @@
 package fon.e_dnevnik.rest;
 
 import fon.e_dnevnik.dto.TeacherDTO;
-import fon.e_dnevnik.dto.TeachersClassesDTO;
 import fon.e_dnevnik.service.impl.TeacherImplementation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/teachers")
 public class TeacherController {
-    private TeacherImplementation teacherImplementation;
+    private final TeacherImplementation teacherImplementation;
 
     @Autowired
     public TeacherController(TeacherImplementation teacherImplementation) {
@@ -27,7 +26,7 @@ public class TeacherController {
 
     @GetMapping("{id}")
     public ResponseEntity<TeacherDTO> findById(@PathVariable String id) throws Exception {
-        return ResponseEntity.ok().body(teacherImplementation.findById((String)id));
+        return ResponseEntity.ok().body(teacherImplementation.findById(id));
     }
 
     @PostMapping

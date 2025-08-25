@@ -2,8 +2,6 @@ package fon.e_dnevnik.service.impl;
 
 import fon.e_dnevnik.dao.TeachersClassesRepository;
 import fon.e_dnevnik.dto.*;
-import fon.e_dnevnik.entity.Grade;
-import fon.e_dnevnik.entity.Teacher;
 import fon.e_dnevnik.entity.TeachersClasses;
 import fon.e_dnevnik.service.ServiceInterface;
 import org.modelmapper.ModelMapper;
@@ -12,12 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TeachersClassesImplementation implements ServiceInterface<TeachersClassesDTO> {
-    private ModelMapper modelMapper;
-    private TeachersClassesRepository teachersClassesRepository;
+    private final ModelMapper modelMapper;
+    private final TeachersClassesRepository teachersClassesRepository;
     @Autowired
     public TeachersClassesImplementation(ModelMapper modelMapper, TeachersClassesRepository teachersClassesRepository) {
         this.modelMapper = modelMapper;

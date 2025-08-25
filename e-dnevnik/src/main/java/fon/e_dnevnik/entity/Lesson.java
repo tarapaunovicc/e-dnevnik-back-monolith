@@ -1,6 +1,5 @@
 package fon.e_dnevnik.entity;
 
-import fon.e_dnevnik.entity.primarykey.LessonPK;
 import jakarta.persistence.*;
 import lombok.*;
 
