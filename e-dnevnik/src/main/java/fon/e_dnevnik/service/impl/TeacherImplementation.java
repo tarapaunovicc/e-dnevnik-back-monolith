@@ -1,7 +1,6 @@
 package fon.e_dnevnik.service.impl;
 
 import fon.e_dnevnik.dao.TeacherRepository;
-import fon.e_dnevnik.dao.TeachersClassesRepository;
 import fon.e_dnevnik.dto.SubjectDTO;
 import fon.e_dnevnik.dto.TeacherDTO;
 import fon.e_dnevnik.entity.Teacher;
@@ -9,7 +8,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import fon.e_dnevnik.service.ServiceInterface;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +34,6 @@ public class TeacherImplementation implements ServiceInterface<TeacherDTO> {
             teacherDTOS.add(teacherDTO);
         }
         return teacherDTOS;
-        //ne koristis
     }
 
     @Override
@@ -56,6 +53,7 @@ public class TeacherImplementation implements ServiceInterface<TeacherDTO> {
 
         return teacherDTO;
     }
+
 
     @Override
     public TeacherDTO save(TeacherDTO teacherDTO) throws Exception {

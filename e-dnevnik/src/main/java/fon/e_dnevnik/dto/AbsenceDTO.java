@@ -1,6 +1,5 @@
 package fon.e_dnevnik.dto;
 
-import fon.e_dnevnik.entity.Lesson;
 import fon.e_dnevnik.entity.primarykey.AbsencePK;
 import lombok.Data;
 
@@ -13,6 +12,7 @@ public class AbsenceDTO {
 
     private boolean isfinal;
 
-    private Lesson lesson;
+    private LessonDTO lesson;
 
+    private String subjectname;
 }

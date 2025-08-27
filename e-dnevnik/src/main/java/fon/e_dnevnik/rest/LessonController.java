@@ -1,7 +1,8 @@
 package fon.e_dnevnik.rest;
 
 import fon.e_dnevnik.dto.LessonDTO;
-import fon.e_dnevnik.entity.primarykey.LessonPK;
+import fon.e_dnevnik.dto.help.NewLessonWithStudentsRequest;
+import fon.e_dnevnik.dto.help.NewLessonWithAbsencesResponse;
 import fon.e_dnevnik.service.impl.LessonImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,13 +27,19 @@ public class LessonController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<LessonDTO> findById(@PathVariable LessonPK id) throws Exception {
+    public ResponseEntity<LessonDTO> findById(@PathVariable Integer id) throws Exception {
         return ResponseEntity.ok().body(lessonImplementation.findById(id));
     }
 
     @PostMapping("/new")
     public ResponseEntity<LessonDTO> save( @RequestBody LessonDTO lessonDTO) throws Exception {
-        System.out.println(lessonDTO);
         return new ResponseEntity<>(lessonImplementation.save(lessonDTO), HttpStatus.CREATED);
+    }
+    @PostMapping("/newlesson")
+    public ResponseEntity<NewLessonWithAbsencesResponse> createLessonWithStudents(
+            @RequestBody NewLessonWithStudentsRequest body
+    ) {
+        var result = lessonImplementation.createLessonAndAbsences(body.getLesson(), body.getStudents());
+        return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 }

@@ -12,8 +12,8 @@ import java.time.LocalDate;
 public class LessonDTO {
 
     private Integer lessonid;
-    private Integer classid;           // iz TeachersClasses
-    private String teacherUsername;   // iz TeachersClasses
+    private Integer classid;
+    private String teacherusername;
     private LocalDate date;
     private int classOrdinalNumber;
     private String curriculum;

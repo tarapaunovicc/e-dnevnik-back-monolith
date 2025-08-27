@@ -17,12 +17,6 @@ public class TeachersClasses implements Serializable {
     @EmbeddedId
     private TeachersClassesPK id;
 
-    @JoinColumn(name="teacherusername",referencedColumnName = "username",insertable=false, updatable=false)
-    @ManyToOne(optional = false)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private Teacher teacher;
-
     @JoinColumn(name="classid",referencedColumnName = "classid",insertable=false, updatable=false)
     @ManyToOne(optional = false)
     @ToString.Exclude

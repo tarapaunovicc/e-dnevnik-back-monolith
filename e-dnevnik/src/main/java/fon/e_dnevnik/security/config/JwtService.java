@@ -17,35 +17,22 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     private static final String SECRET_KEY = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
-
-
     public String extractUsername(String token){
         return extractClaim(token,Claims::getSubject);
     }
-
-
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver){
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
-
-
     public String generateToken(UserDetails userDetails){
         return generateToken(new HashMap<>(),userDetails);
     }
-
-
-
     public String generateToken(Map<String,Object> extractClaims, UserDetails userDetails){
         return buildToken(extractClaims,userDetails,1000*1000*60*24);
     }
-
-
     public String generateRefreshToken(UserDetails userDetails) {
         return buildToken(new HashMap<>(), userDetails, 1000*1000*60*24);
     }
-
-
     private String buildToken(Map<String,Object> extraClaims,UserDetails userDetails,long expiration){
         return Jwts
                 .builder()

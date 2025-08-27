@@ -7,7 +7,6 @@ import fon.e_dnevnik.service.ServiceInterface;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,7 +41,7 @@ public class TeachersClassesImplementation implements ServiceInterface<TeachersC
         return null;
     }
     public List<TeachersClassesDTO> findByTeacherUsername(String username) {
-        List<TeachersClasses> teachersClasses = teachersClassesRepository.findByTeacherUsername(username);
+        List<TeachersClasses> teachersClasses = teachersClassesRepository.findByIdTeacherusername(username);
         List<TeachersClassesDTO> dtos = new ArrayList<>();
         for (TeachersClasses tc : teachersClasses) {
             TeachersClassesDTO dto = new TeachersClassesDTO();
@@ -51,7 +50,7 @@ public class TeachersClassesImplementation implements ServiceInterface<TeachersC
                 dto.setTeacherusername(tc.getId().getTeacherusername());
             } else {
                 dto.setClassid(tc.getCl() != null ? tc.getCl().getClassId() : null);
-                dto.setTeacherusername(tc.getTeacher() != null ? tc.getTeacher().getUsername() : null);
+                dto.setTeacherusername(tc.getId().getTeacherusername());
             }
             if (tc.getCl() != null) {
                 dto.setCl(modelMapper.map(tc.getCl(), ClassDTO.class));

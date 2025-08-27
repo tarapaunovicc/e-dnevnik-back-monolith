@@ -24,15 +24,11 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-
     private final JwtAuthenticationFilter jwtAuthFilter;
-
 
     private final AuthenticationProvider authenticationProvider;
 
-
     private final LogoutHandler logoutHandler;
-
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {

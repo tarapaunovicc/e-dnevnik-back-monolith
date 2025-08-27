@@ -23,9 +23,12 @@ public class Class implements Serializable {
     @Column(name="number")
     private int number;
 
-    @JoinColumn(name="classteacher",referencedColumnName = "username")
-    @OneToOne(optional = true)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private Teacher classTeacher;
+    @Column(name="classteacher")
+    private String classTeacherUsername;
+
+//    @JoinColumn(name="classteacher",referencedColumnName = "username")
+//    @OneToOne(optional = true)
+//    @ToString.Exclude
+//    @EqualsAndHashCode.Exclude
+//    private Teacher classTeacher;
 }

@@ -11,26 +11,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthenticationResponse {
-    /**
-     * Primary key of entity that connects to user
-     */
+
     private String username;
 
-    /**
-     * Represent JWT access token of user.
-     */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String accessToken;
 
-    /**
-     * Represent JWT refresh token of user
-     */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String refreshToken;
 
-    /**
-     * Represent message for user
-     */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String message;
 

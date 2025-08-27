@@ -2,7 +2,6 @@ package fon.e_dnevnik.rest;
 
 import fon.e_dnevnik.dto.GradeDTO;
 import fon.e_dnevnik.dto.help.GradeFilterRequest;
-import fon.e_dnevnik.entity.primarykey.GradePK;
 import fon.e_dnevnik.service.impl.GradeImplementation;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class GradeController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<GradeDTO> findById(@PathVariable GradePK id) throws Exception {
+    public ResponseEntity<GradeDTO> findById(@PathVariable Integer id) throws Exception {
         return ResponseEntity.ok().body(gradeImplementation.findById(id));
     }
 
@@ -43,10 +42,13 @@ public class GradeController {
     }
     @PostMapping("/by-student-teacher")
     public List<GradeDTO> findByStudentAndTeacher(@RequestBody GradeFilterRequest request) {
-        System.out.println("Student: " + request.getStudentusername() + ", Teacher: " + request.getTeacherusername());
         return gradeImplementation.findByStudentAndTeacher(
                 request.getStudentusername(),
                 request.getTeacherusername()
         );
+    }
+    @GetMapping("/student2/{username}")
+    public List<GradeDTO> getGradesWithSubjects(@PathVariable String username){
+        return gradeImplementation.findByStudentUsernameWithSubject(username);
     }
 }

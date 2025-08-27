@@ -37,7 +37,6 @@ public class StudentController {
 
     @GetMapping("/class/{classid}")
     public List<StudentDTO> findByStudentClassClassId(@PathVariable int classid){
-        System.out.println("Uslo je u kontrolera");
         return studentImplementation.findByStudentClassClassId(classid);
     }
 }

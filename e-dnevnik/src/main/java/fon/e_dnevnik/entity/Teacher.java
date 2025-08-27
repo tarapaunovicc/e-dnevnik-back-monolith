@@ -28,7 +28,4 @@ public class Teacher implements Serializable {
     @EqualsAndHashCode.Exclude
     private Subject subject;
 
-    @OneToOne
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    private User userTeacher;
 }

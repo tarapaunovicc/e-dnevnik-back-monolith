@@ -15,7 +15,6 @@ public class AuthenticationRequest {
     @NotBlank(message = "Lozinka je obavezna")
     private String username;
 
-
     @NotBlank(message = "Lozinka je obavezna")
     private String password;
 }

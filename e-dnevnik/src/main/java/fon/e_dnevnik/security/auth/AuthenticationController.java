@@ -19,15 +19,10 @@ public class AuthenticationController {
 
     private final AuthenticationService authenticationService;
 
-
-
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authentication(@Valid @RequestBody AuthenticationRequest request){
         return ResponseEntity.ok(authenticationService.authenticate(request));
     }
-
-
-
     @PostMapping("/refreshToken")
     public void refreshToken(HttpServletRequest request, HttpServletResponse response) throws IOException {
         authenticationService.refreshToken(request, response);

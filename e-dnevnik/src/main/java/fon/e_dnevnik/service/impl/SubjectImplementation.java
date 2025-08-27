@@ -7,7 +7,6 @@ import fon.e_dnevnik.service.ServiceInterface;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +14,8 @@ import java.util.Optional;
 @Service
 public class SubjectImplementation implements ServiceInterface<SubjectDTO> {
 
-    private SubjectRepository subjectRepository;
-    private ModelMapper modelMapper;
+    private final SubjectRepository subjectRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public SubjectImplementation(SubjectRepository subjectRepository, ModelMapper modelMapper) {
@@ -39,10 +38,8 @@ public class SubjectImplementation implements ServiceInterface<SubjectDTO> {
     @Override
     public SubjectDTO findById(Object id) throws Exception {
         Optional<Subject> subject=subjectRepository.findById((Integer) id);
-        SubjectDTO subjectDTO;
         if(subject.isPresent()) {
-            subjectDTO = modelMapper.map(subject.get(), SubjectDTO.class);
-            return subjectDTO;
+            return modelMapper.map(subject.get(), SubjectDTO.class);
         }
         else{
             throw new Exception("Ne postoji predmet");

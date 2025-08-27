@@ -15,8 +15,8 @@ import java.util.Optional;
 @Service
 public class UserImplementation implements ServiceInterface<UserDTO> {
 
-    private UserRepository userRepository;
-    private ModelMapper modelMapper;
+    private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
     @Autowired
     public UserImplementation(UserRepository userRepository, ModelMapper modelMapper) {
@@ -26,8 +26,6 @@ public class UserImplementation implements ServiceInterface<UserDTO> {
 
     @Override
     public List<UserDTO> findAll() {
-        System.out.println("findAll method called impl");
-
         List<User> users = userRepository.findAll();
         List<UserDTO> userDTOS = new ArrayList<>();
 

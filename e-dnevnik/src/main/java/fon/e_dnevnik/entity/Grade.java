@@ -1,6 +1,5 @@
 package fon.e_dnevnik.entity;
 
-import fon.e_dnevnik.entity.primarykey.GradePK;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,32 +14,26 @@ import java.time.LocalDate;
 @Table(name = "grade")
 public class Grade implements Serializable {
 
-    @EmbeddedId
-    private GradePK id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer gradeid;
 
-    @Column(name="date")
+    @Column(nullable = false)
+    private String studentusername;
+
+    @Column(nullable = false)
+    private String teacherusername;
+
+    @Column(nullable = false)
     private LocalDate date;
 
-    @Column(name="grade")
+    @Column(nullable = false)
     private int grade;
 
-    @JoinColumn(name="studentusername",referencedColumnName = "username", insertable=false, updatable=false)
-    @ManyToOne(optional = false)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private Student student;
 
-    @JoinColumn(name="teacherusername",referencedColumnName = "username",insertable=false, updatable=false)
-    @ManyToOne(optional = false)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    private Teacher teacher;
-
-    public Grade(GradePK id) {
-        this.id = id;
-    }
-
-    public Grade(String teacherUsername, String studentUsername, int gradeid){
-        this.id=new GradePK(teacherUsername,studentUsername,gradeid);
-    }
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "teacherusername", referencedColumnName = "username",
+//            insertable = false, updatable = false)
+//    @ToString.Exclude @EqualsAndHashCode.Exclude
+//    private Teacher teacher;
 }

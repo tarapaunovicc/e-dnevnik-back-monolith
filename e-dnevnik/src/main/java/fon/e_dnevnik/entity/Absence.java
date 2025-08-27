@@ -1,6 +1,5 @@
 package fon.e_dnevnik.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import fon.e_dnevnik.entity.primarykey.AbsencePK;
 import jakarta.persistence.*;
 import lombok.*;
@@ -23,16 +22,5 @@ public class Absence implements Serializable {
 
     @Column(name="isfinal")
     private boolean isfinal;
-
-    @JoinColumn(name="studentusername",referencedColumnName = "username",insertable=false, updatable=false)
-    @ManyToOne(optional = false)
-    @ToString.Exclude
-    @EqualsAndHashCode.Exclude
-    @JsonIgnore
-    private Student student;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "lesson_id", referencedColumnName = "lesson_id", insertable=false, updatable=false)
-    private Lesson lesson;
 
 }

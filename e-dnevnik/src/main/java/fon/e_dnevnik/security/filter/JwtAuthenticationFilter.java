@@ -22,15 +22,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-
     private final JwtService jwtService;
-
 
     private final UserDetailsService userDetailsService;
 
-
     private final TokenRepository tokenRepository;
-
     @Override
     protected void doFilterInternal(
             @NonNull HttpServletRequest request,
@@ -43,7 +39,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         final String authHeader = request.getHeader("Authorization");
-        System.out.println(authHeader);
         final String jwt;
         final String userUsername;
         if (authHeader == null ||!authHeader.startsWith("Bearer ")) {
@@ -51,18 +46,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         jwt = authHeader.substring(7);
-        System.out.println(jwt);
         userUsername = jwtService.extractUsername(jwt);
-        System.out.println("Username je: " + userUsername);
         if (userUsername != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            System.out.println("Ulazi u if ");
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userUsername);
             var isTokenValid = tokenRepository.findByToken(jwt)
                     .map(t -> !t.isExpired() && !t.isRevoked())
                     .orElse(false);
-            System.out.println("Pronalazi token." + isTokenValid);
             if (jwtService.isTokenValid(jwt, userDetails) && isTokenValid) {
-                System.out.println("Token je validan.");
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,

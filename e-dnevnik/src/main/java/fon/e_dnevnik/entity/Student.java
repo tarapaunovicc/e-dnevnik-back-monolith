@@ -1,11 +1,8 @@
 package fon.e_dnevnik.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.io.Serializable;
-import java.util.Collection;
 
 @Entity
 @NoArgsConstructor
@@ -28,24 +25,11 @@ public class Student implements Serializable {
     @Column(name="umcn")
     private String UMCN;
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "studentclass", referencedColumnName = "classid")
-    private Class studentClass;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Collection<Grade> grades;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "student", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private Collection<Absence> absences;
-
-    @OneToOne
-    @JoinColumn(name = "username", referencedColumnName = "username")
-    private User userStudent;
+    @Column(name = "studentclass", nullable = false)
+    private Integer studentClass;
 
 //    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-//    @JoinColumn(name = "username1", referencedColumnName = "username")
-//    @JsonIgnore
-//    private User userStudent;
+//    @JoinColumn(name = "studentclass", referencedColumnName = "classid")
+//    private Class studentClass;
+
 }

@@ -14,17 +14,16 @@ import java.time.LocalDate;
 @Builder
 public class Lesson implements Serializable {
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-@Column(name = "lesson_id")
-private Integer lessonid;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "lesson_id")
+    private Integer lessonid;
 
-    @ManyToOne(optional = false)
-    @JoinColumns({
-            @JoinColumn(name = "classid", referencedColumnName = "classid"),
-            @JoinColumn(name = "username", referencedColumnName = "teacherusername")
-    })
-    private TeachersClasses teachersClasses;
+    @Column(name = "classid", nullable = false)
+    private Integer classid;
+
+    @Column(name = "username", nullable=false)
+    private String teacherusername;
 
     @Column(name = "date", nullable = false)
     private LocalDate date;
