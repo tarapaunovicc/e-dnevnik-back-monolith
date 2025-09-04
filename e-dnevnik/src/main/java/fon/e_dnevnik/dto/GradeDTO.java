@@ -1,6 +1,7 @@
 package fon.e_dnevnik.dto;
 
 
+import fon.e_dnevnik.entity.GradeType;
 import lombok.Data;
 import java.time.LocalDate;
 
@@ -18,5 +19,7 @@ public class GradeDTO {
     private int grade;
 
     private String subjectName;
+
+    private GradeType type;
 }
 

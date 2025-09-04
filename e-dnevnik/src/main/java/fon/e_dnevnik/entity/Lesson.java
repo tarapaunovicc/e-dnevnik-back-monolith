@@ -34,4 +34,7 @@ public class Lesson implements Serializable {
     @Column(name = "curriculum")
     private String curriculum;
 
+    @Column(name="topicid")
+    private int topicid;
+
 }

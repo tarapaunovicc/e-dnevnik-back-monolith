@@ -30,10 +30,7 @@ public class Grade implements Serializable {
     @Column(nullable = false)
     private int grade;
 
-
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "teacherusername", referencedColumnName = "username",
-//            insertable = false, updatable = false)
-//    @ToString.Exclude @EqualsAndHashCode.Exclude
-//    private Teacher teacher;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private GradeType type;
 }

@@ -60,6 +60,7 @@ public LessonDTO save(LessonDTO lessonDTO) throws Exception {
     lesson.setCurriculum(lessonDTO.getCurriculum());
     lesson.setTeacherusername(lessonDTO.getTeacherusername());
     lesson.setClassid(lessonDTO.getClassid());
+    lesson.setTopicid(lessonDTO.getTopicid());
 
     Lesson savedLesson = lessonRepository.save(lesson);
 
@@ -70,6 +71,7 @@ public LessonDTO save(LessonDTO lessonDTO) throws Exception {
     savedLessonDTO.setDate(savedLesson.getDate());
     savedLessonDTO.setClassOrdinalNumber(savedLesson.getClassOrdinalNumber());
     savedLessonDTO.setCurriculum(savedLesson.getCurriculum());
+    savedLessonDTO.setTopicid(savedLesson.getTopicid());
 
     return savedLessonDTO;
 }
@@ -82,6 +84,8 @@ public LessonDTO save(LessonDTO lessonDTO) throws Exception {
         lesson.setDate(lessonDTO.getDate());
         lesson.setClassOrdinalNumber(lessonDTO.getClassOrdinalNumber());
         lesson.setCurriculum(lessonDTO.getCurriculum());
+        lesson.setTopicid(lessonDTO.getTopicid());
+
 
         Lesson savedLesson = lessonRepository.save(lesson);
 

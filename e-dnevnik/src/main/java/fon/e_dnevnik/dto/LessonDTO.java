@@ -17,5 +17,6 @@ public class LessonDTO {
     private LocalDate date;
     private int classOrdinalNumber;
     private String curriculum;
+    private int topicid;
 
 }

@@ -98,7 +98,7 @@ public class GradeImplementation implements ServiceInterface<GradeDTO> {
             return grades.stream()
                     .map(g -> {
                         GradeDTO dto = modelMapper.map(g, GradeDTO.class);
-                        dto.setSubjectName(null); // ili "" ako želiš prazno
+                        dto.setSubjectName(null);
                         return dto;
                     })
                     .toList();
