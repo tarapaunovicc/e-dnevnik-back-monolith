@@ -2,8 +2,6 @@ package fon.e_dnevnik.service.impl;
 
 import fon.e_dnevnik.dao.TopicRepository;
 import fon.e_dnevnik.dto.TopicDTO;
-import fon.e_dnevnik.dto.UserDTO;
-import fon.e_dnevnik.entity.Topic;
 import fon.e_dnevnik.service.ServiceInterface;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
